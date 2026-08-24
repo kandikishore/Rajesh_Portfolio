@@ -1,0 +1,424 @@
+/**
+ * StaggeredMenu — styles from React Bits, retinted to this site's tokens.
+ *
+ * Structural rules (layering, transforms, overflow) are unchanged from the
+ * source: the GSAP timeline in StaggeredMenu.tsx targets these class names and
+ * relies on the stacking order below. Only colour, type and gutter values were
+ * changed, so an upstream update can be re-applied by diffing those.
+ */
+
+.staggered-menu-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 50;
+  pointer-events: none;
+}
+
+.staggered-menu-wrapper.fixed-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100dvh;
+  z-index: 50;
+  overflow: hidden;
+}
+
+.staggered-menu-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* Shares the rail variables with the hero wordmark (see globals.css), so the
+     shrinking hero name lands exactly on this logo. */
+  padding: var(--header-pad-y, 1.375rem) var(--header-pad-x, 1.5rem);
+  background: transparent;
+  pointer-events: none;
+  z-index: 20;
+}
+
+@media (min-width: 1200px) {
+  .staggered-menu-header {
+    padding-inline: var(--header-pad-x);
+  }
+}
+
+.staggered-menu-header > * {
+  pointer-events: auto;
+}
+
+.sm-logo {
+  display: flex;
+  align-items: center;
+  user-select: none;
+}
+
+.sm-logo-img {
+  display: block;
+  height: 32px;
+  width: auto;
+  object-fit: contain;
+}
+
+.sm-logo-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-display), Impact, sans-serif;
+  font-size: clamp(1.35rem, 5vw, 2rem);
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: #ffffff;
+  text-decoration: none;
+  /* Crossfades with the hero wordmark, which occupies this exact spot at rest.
+     Hero.tsx drives --sm-logo-opacity; defaults to 1 on pages without a hero. */
+  opacity: var(--sm-logo-opacity, 1);
+}
+
+.sm-logo-text .sm-logo-dot {
+  color: #ff4925;
+}
+
+.sm-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+/* "Let's Talk" CTA — outlined pill that fills with the accent on hover. */
+.sm-cta {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1.1rem;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  background: transparent;
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease;
+}
+
+.sm-cta:hover {
+  background: var(--sm-accent, #ff4925);
+  border-color: var(--sm-accent, #ff4925);
+  color: #ffffff;
+}
+
+.sm-cta:focus-visible {
+  outline: 2px solid var(--sm-accent, #ff4925);
+  outline-offset: 4px;
+}
+
+.sm-toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  overflow: visible;
+}
+
+.sm-toggle:focus-visible {
+  outline: 2px solid #ff4925;
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.sm-toggle-textWrap {
+  position: relative;
+  display: inline-block;
+  height: 1em;
+  overflow: hidden;
+  white-space: nowrap;
+  width: var(--sm-toggle-width, auto);
+  min-width: var(--sm-toggle-width, auto);
+}
+
+.sm-toggle-textInner {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.sm-toggle-line {
+  display: block;
+  height: 1em;
+  line-height: 1;
+}
+
+.sm-icon {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  flex: 0 0 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform;
+}
+
+.sm-icon-line {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 2px;
+  /* Centre vertically without a transform, so GSAP fully owns the transform
+     (y offset + rotate) for the two-bars ⇄ X morph in StaggeredMenu.tsx. */
+  margin-top: -1px;
+  background: currentColor;
+  border-radius: 2px;
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+
+.sm-prelayers {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: clamp(280px, 38vw, 460px);
+  pointer-events: none;
+  z-index: 5;
+  opacity: 0;
+}
+
+[data-position="left"] .sm-prelayers {
+  right: auto;
+  left: 0;
+}
+
+.sm-prelayer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  transform: translateX(0);
+  opacity: 0;
+}
+
+.staggered-menu-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: clamp(280px, 38vw, 460px);
+  height: 100%;
+  background: #0a0a0a;
+  border-left: 1px solid #333333;
+  display: flex;
+  flex-direction: column;
+  padding: 7rem 2rem 2rem 2rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  z-index: 10;
+  pointer-events: auto;
+  opacity: 0;
+}
+
+[data-position="left"] .staggered-menu-panel {
+  right: auto;
+  left: 0;
+  border-left: 0;
+  border-right: 1px solid #333333;
+}
+
+.sm-panel-inner {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.sm-panel-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.sm-panel-itemWrap {
+  position: relative;
+  overflow: hidden;
+  line-height: 1;
+}
+
+.sm-panel-item {
+  position: relative;
+  color: #ffffff;
+  font-family: var(--font-display), Impact, sans-serif;
+  font-weight: 400;
+  font-size: clamp(2.5rem, 6vw, 3.5rem);
+  cursor: pointer;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  transition: color 0.25s ease;
+  display: inline-block;
+  text-decoration: none;
+  padding-right: 1.4em;
+}
+
+.sm-panel-itemLabel {
+  display: inline-block;
+  will-change: transform;
+  transform-origin: 50% 100%;
+}
+
+.sm-panel-item:hover {
+  color: var(--sm-accent, #ff4925);
+}
+
+.sm-panel-item:focus-visible {
+  outline: 2px solid var(--sm-accent, #ff4925);
+  outline-offset: 4px;
+}
+
+.sm-panel-list[data-numbering] {
+  counter-reset: smItem;
+}
+
+.sm-panel-list[data-numbering] .sm-panel-item::after {
+  counter-increment: smItem;
+  content: counter(smItem, decimal-leading-zero);
+  position: absolute;
+  top: 0.15em;
+  right: 0.6em;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--sm-accent, #ff4925);
+  letter-spacing: 0.08em;
+  pointer-events: none;
+  user-select: none;
+  opacity: var(--sm-num-opacity, 0);
+}
+
+.sm-socials {
+  margin-top: auto;
+  padding-top: 2rem;
+  border-top: 1px solid #333333;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.sm-socials-title {
+  margin: 0;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  color: var(--sm-accent, #ff4925);
+}
+
+.sm-socials-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.sm-socials-link {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: #cacaca;
+  text-decoration: none;
+  position: relative;
+  padding: 2px 0;
+  display: inline-block;
+  transition:
+    color 0.3s ease,
+    opacity 0.3s ease;
+}
+
+.sm-socials-link:hover {
+  color: var(--sm-accent, #ff4925);
+}
+
+.sm-socials-link:focus-visible {
+  outline: 2px solid var(--sm-accent, #ff4925);
+  outline-offset: 3px;
+}
+
+/* Dim the siblings of whichever social link is hovered or focused. */
+.staggered-menu-panel .sm-socials-list .sm-socials-link {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.staggered-menu-panel .sm-socials-list:hover .sm-socials-link:not(:hover) {
+  opacity: 0.35;
+}
+
+.staggered-menu-panel
+  .sm-socials-list:focus-within
+  .sm-socials-link:not(:focus-visible) {
+  opacity: 0.35;
+}
+
+.staggered-menu-panel .sm-socials-list .sm-socials-link:hover,
+.staggered-menu-panel .sm-socials-list .sm-socials-link:focus-visible {
+  opacity: 1;
+}
+
+/* Full-bleed panel on tablet and below. */
+@media (max-width: 1024px) {
+  .staggered-menu-panel {
+    width: 100%;
+    left: 0;
+    right: 0;
+    border-left: 0;
+    padding-inline: 1.5rem;
+  }
+
+  .sm-prelayers {
+    width: 100%;
+    left: 0;
+    right: 0;
+  }
+}
+
+/* Keep the header uncluttered on phones — the CTA also lives in the panel. */
+@media (max-width: 639px) {
+  .sm-cta {
+    display: none;
+  }
+}
+
+/* The panel is opaque, so freeze its motion rather than the whole overlay. */
+@media (prefers-reduced-motion: reduce) {
+  .sm-panel-item,
+  .sm-socials-link {
+    transition: none;
+  }
+}
