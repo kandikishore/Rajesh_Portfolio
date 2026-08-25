@@ -46,7 +46,7 @@ function card({ w, h, label, kind }) {
       <defs>${bg}</defs>
       <rect width="${w}" height="${h}" fill="url(#g)"/>
       <text x="${cx}" y="${cy + markSize * 0.16}" font-family="Arial, sans-serif" font-weight="700"
-            font-size="${markSize}" fill="#ffffff" fill-opacity="0.03" text-anchor="middle">ECHO</text>
+            font-size="${markSize}" fill="#ffffff" fill-opacity="0.03" text-anchor="middle">RAJESH</text>
       <rect x="${pad}" y="${pad}" width="${w - pad * 2}" height="${h - pad * 2}"
             fill="none" stroke="${LINE}" stroke-width="1"/>
       <rect x="${pad}" y="${pad}" width="${Math.round(min * 0.12)}" height="2" fill="${ACCENT}"/>
