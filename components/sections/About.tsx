@@ -1,6 +1,6 @@
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { ABOUT } from "@/lib/data";
+import { ABOUT, assetPath } from "@/lib/data";
 
 export function About() {
   return (
@@ -12,7 +12,7 @@ export function About() {
       {/* Full-bleed background image */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/images/about-bg.jpg')" }}
+        style={{ backgroundImage: `url(${assetPath("/images/about-bg.jpg")})` }}
         aria-hidden
       />
 

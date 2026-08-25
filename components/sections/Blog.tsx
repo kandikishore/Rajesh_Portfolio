@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { SplitText } from "@/components/ui/SplitText";
-import { POSTS } from "@/lib/data";
+import { POSTS, assetPath } from "@/lib/data";
 
 export function Blog() {
   const [featuredPost, secondPost, thirdPost] = POSTS;
@@ -13,7 +13,7 @@ export function Blog() {
       {/* Section Background Image with Opacity & Edge Blending */}
       <div className="absolute inset-0 -z-10 bg-ink">
         <Image
-          src="/images/insights-bg.png"
+          src={assetPath("/images/insights-bg.png")}
           alt="Section Background"
           fill
           sizes="100vw"

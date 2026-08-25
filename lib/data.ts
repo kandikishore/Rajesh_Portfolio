@@ -8,6 +8,10 @@
  * placeholders so the portfolio stays production-ready without inventing facts.
  */
 
+/** Prefix public files when the site is served from a GitHub Pages repository. */
+export const assetPath = (path: string) =>
+  `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${path}`;
+
 export const BRAND = {
   name: "Rajesh",
   wordmark: "Rajesh",
@@ -50,8 +54,8 @@ export const SOCIALS = [
 ] as const;
 
 export const HERO = {
-  base: "/images/hero-base.webp",
-  reveal: "/images/hero-reveal.webp",
+  base: assetPath("/images/hero-base.webp"),
+  reveal: assetPath("/images/hero-reveal.webp"),
   identity: "Rajesh / Freelance Video Editor",
   servicesLine: "YouTube • Reels • Shorts • Promotional • Social Media",
   statementStrong: "Stories, pacing, hooks, motion, and polish",
@@ -103,7 +107,7 @@ export const PROJECTS: readonly Project[] = [
     year: "[Year]",
     description:
       "[Add a short summary of the video style, pacing, and what this edit was designed to achieve.]",
-    image: "/images/work-1.jpg",
+    image: assetPath("/images/work-1.jpg"),
     href: "#",
     tags: ["Story Edit", "Retention", "Pacing"],
   },
@@ -115,7 +119,7 @@ export const PROJECTS: readonly Project[] = [
     year: "[Year]",
     description:
       "[Add a short description of the hook, captions, pacing, and why this short-form piece stands out.]",
-    image: "/images/work-2.jpg",
+    image: assetPath("/images/work-2.jpg"),
     href: "#",
     tags: ["Hooks", "Captions", "Reels"],
   },
@@ -127,7 +131,7 @@ export const PROJECTS: readonly Project[] = [
     year: "[Year]",
     description:
       "[Add the concept, audience, and the kind of polished promo feeling this project delivers.]",
-    image: "/images/work-3.jpg",
+    image: assetPath("/images/work-3.jpg"),
     href: "#",
     tags: ["Brand Film", "Color", "Sound"],
   },
@@ -139,7 +143,7 @@ export const PROJECTS: readonly Project[] = [
     year: "[Year]",
     description:
       "[Add how this edit was tailored for platform-native delivery, fast engagement, and clean branding.]",
-    image: "/images/post-1.jpg",
+    image: assetPath("/images/post-1.jpg"),
     href: "#",
     tags: ["Platform Cut", "Fast Pacing", "Branding"],
   },
@@ -151,7 +155,7 @@ export const PROJECTS: readonly Project[] = [
     year: "[Year]",
     description:
       "[Add the animation style, text treatment, transitions, and motion system used in this project.]",
-    image: "/images/post-2.jpg",
+    image: assetPath("/images/post-2.jpg"),
     href: "#",
     tags: ["Motion", "Titles", "Transitions"],
   },
@@ -163,7 +167,7 @@ export const PROJECTS: readonly Project[] = [
     year: "[Year]",
     description:
       "[Add what makes the thumbnail clickable, clear, and consistent with the content strategy.]",
-    image: "/images/post-3.jpg",
+    image: assetPath("/images/post-3.jpg"),
     href: "#",
     tags: ["CTR", "Composition", "Design"],
   },
@@ -174,8 +178,8 @@ export const SHOWREEL = {
   title: "A fast look at pacing, polish, and story-driven editing.",
   blurb:
     "Use this section for your main showreel or highlight reel. Replace the current preview with your strongest edit montage.",
-  video: "/videos/hero.mp4",
-  poster: "/images/hero-reveal.webp",
+  video: assetPath("/videos/hero.mp4"),
+  poster: assetPath("/images/hero-reveal.webp"),
   primaryCtaLabel: "Watch Showreel",
   primaryCtaHref: "#work",
   secondaryCtaLabel: "Start A Project",
@@ -197,7 +201,7 @@ export const SERVICES: readonly Service[] = [
     blurb:
       "Long-form edits built around story flow, audience retention, and a polished viewing experience.",
     items: ["Structure", "Pacing", "Retention Hooks"],
-    image: "/images/service-1.jpg",
+    image: assetPath("/images/service-1.jpg"),
   },
   {
     index: "02",
@@ -205,7 +209,7 @@ export const SERVICES: readonly Service[] = [
     blurb:
       "Fast, platform-native reels and shorts designed to land quickly and keep attention high.",
     items: ["Shorts", "Reels", "Captions"],
-    image: "/images/service-2.jpg",
+    image: assetPath("/images/service-2.jpg"),
   },
   {
     index: "03",
@@ -213,7 +217,7 @@ export const SERVICES: readonly Service[] = [
     blurb:
       "Clean, cinematic edits for launches, campaigns, products, and brand storytelling.",
     items: ["Promos", "Brand Tone", "Delivery Cuts"],
-    image: "/images/service-3.jpg",
+    image: assetPath("/images/service-3.jpg"),
   },
   {
     index: "04",
@@ -221,7 +225,7 @@ export const SERVICES: readonly Service[] = [
     blurb:
       "Consistent edits tailored for brand presence across Instagram, YouTube, LinkedIn, and more.",
     items: ["Social Cuts", "Platform Sizing", "Brand Consistency"],
-    image: "/images/service-4.jpg",
+    image: assetPath("/images/service-4.jpg"),
   },
   {
     index: "05",
@@ -229,7 +233,7 @@ export const SERVICES: readonly Service[] = [
     blurb:
       "Clickable thumbnail direction and visual treatment built to support stronger first impressions.",
     items: ["Thumbnail Design", "Typography", "CTR Focus"],
-    image: "/images/insights-new-bg.png",
+    image: assetPath("/images/insights-new-bg.png"),
   },
 ] as const;
 
@@ -273,7 +277,7 @@ export const STATS: readonly Stat[] = [
 export const WHY_US = {
   label: "(WHY RAJESH)",
   heading: "EDITING THAT SERVES THE STORY",
-  image: "/images/why-us.jpg",
+  image: assetPath("/images/why-us.jpg"),
 } as const;
 
 export const SKILLS_INTRO = {
@@ -324,7 +328,7 @@ export const PROCESS: readonly ProcessStep[] = [
       "Every edit starts by understanding what the video needs to do and who it needs to connect with.",
     subsections: ["Audience", "Platform", "Creative Direction"],
     deliverables: ["Creative Brief"],
-    image: "/images/service-1.jpg",
+    image: assetPath("/images/service-1.jpg"),
   },
   {
     id: "plan",
@@ -335,7 +339,7 @@ export const PROCESS: readonly ProcessStep[] = [
       "The strongest edits feel intentional. Planning defines story flow, energy, and the right edit rhythm.",
     subsections: ["Story Flow", "Hook Strategy", "Edit Roadmap"],
     deliverables: ["Edit Plan"],
-    image: "/images/service-2.jpg",
+    image: assetPath("/images/service-2.jpg"),
   },
   {
     id: "edit",
@@ -346,7 +350,7 @@ export const PROCESS: readonly ProcessStep[] = [
       "This is where footage turns into something watchable, clear, and tuned to hold attention.",
     subsections: ["Assembly Cut", "Timing", "Visual Rhythm"],
     deliverables: ["First Cut"],
-    image: "/images/service-3.jpg",
+    image: assetPath("/images/service-3.jpg"),
   },
   {
     id: "refine",
@@ -357,7 +361,7 @@ export const PROCESS: readonly ProcessStep[] = [
       "Sound, color, captions, motion, and transitions are refined so the final piece feels premium.",
     subsections: ["Sound", "Color", "Captions"],
     deliverables: ["Refined Cut"],
-    image: "/images/service-4.jpg",
+    image: assetPath("/images/service-4.jpg"),
   },
   {
     id: "deliver",
@@ -368,7 +372,7 @@ export const PROCESS: readonly ProcessStep[] = [
       "Final exports are delivered in the right formats for publishing, review, and future reuse.",
     subsections: ["Exports", "Versions", "Delivery"],
     deliverables: ["Final Files"],
-    image: "/images/cta-bg.jpg",
+    image: assetPath("/images/cta-bg.jpg"),
   },
 ] as const;
 
@@ -432,8 +436,8 @@ export const FEATURED_TESTIMONIAL = {
     "[Add a strong featured testimonial here about communication, pacing, creative quality, or turnaround.]",
   author: "[Client Name]",
   role: "[Creator / Brand / Business]",
-  avatar: "/images/avatar-featured.jpg",
-  image: "/images/testimonial-highlight.jpg",
+  avatar: assetPath("/images/avatar-featured.jpg"),
+  image: assetPath("/images/testimonial-highlight.jpg"),
 } as const;
 
 export interface Testimonial {
@@ -449,28 +453,28 @@ export const TESTIMONIALS: readonly Testimonial[] = [
       "[Add real client feedback about the editing style, quality, and creative process.]",
     author: "[Client Name]",
     role: "[Creator / Brand]",
-    avatar: "/images/avatar-1.jpg",
+    avatar: assetPath("/images/avatar-1.jpg"),
   },
   {
     quote:
       "[Add real client feedback about communication, revisions, and final delivery.]",
     author: "[Client Name]",
     role: "[Business / Founder]",
-    avatar: "/images/avatar-2.jpg",
+    avatar: assetPath("/images/avatar-2.jpg"),
   },
   {
     quote:
       "[Add real client feedback about pacing, storytelling, or audience engagement.]",
     author: "[Client Name]",
     role: "[YouTube Creator]",
-    avatar: "/images/avatar-3.jpg",
+    avatar: assetPath("/images/avatar-3.jpg"),
   },
   {
     quote:
       "[Add real client feedback about social content, promos, or thumbnail support.]",
     author: "[Client Name]",
     role: "[Marketing Team]",
-    avatar: "/images/avatar-4.jpg",
+    avatar: assetPath("/images/avatar-4.jpg"),
   },
 ] as const;
 
@@ -521,7 +525,7 @@ export const CTA = {
     "Let's turn it into something worth watching. Replace the contact details below with your live email and social links.",
   buttonLabel: "Start A Project",
   buttonHref: "mailto:add-your-email@example.com",
-  image: "/images/cta-bg.jpg",
+  image: assetPath("/images/cta-bg.jpg"),
 } as const;
 
 export interface PricingTier {
@@ -581,7 +585,7 @@ export const POSTS: readonly Post[] = [
     excerpt: "A placeholder for Rajesh's perspective on hooks, pacing, and creating edits that earn attention quickly.",
     date: "[Date]",
     category: "Editing",
-    image: "/images/post-1.jpg",
+    image: assetPath("/images/post-1.jpg"),
     href: "#",
   },
   {
@@ -589,7 +593,7 @@ export const POSTS: readonly Post[] = [
     excerpt: "A placeholder for an editing note about structure, rhythm, and shaping raw footage into a clear story.",
     date: "[Date]",
     category: "Storytelling",
-    image: "/images/post-2.jpg",
+    image: assetPath("/images/post-2.jpg"),
     href: "#",
   },
   {
@@ -597,7 +601,7 @@ export const POSTS: readonly Post[] = [
     excerpt: "A placeholder for a practical note on adapting video content for YouTube, Shorts, Reels, and social media.",
     date: "[Date]",
     category: "Content Creation",
-    image: "/images/post-3.jpg",
+    image: assetPath("/images/post-3.jpg"),
     href: "#",
   },
 ] as const;

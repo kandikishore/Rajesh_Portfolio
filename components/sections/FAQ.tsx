@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { SplitText } from "@/components/ui/SplitText";
-import { FAQ as FAQ_ITEMS } from "@/lib/data";
+import { FAQ as FAQ_ITEMS, assetPath } from "@/lib/data";
 
 export function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
@@ -18,7 +18,7 @@ export function FAQ() {
     >
       <div className="absolute inset-0 -z-10">
         <Image
-          src="/images/faq-bg.jpg"
+          src={assetPath("/images/faq-bg.jpg")}
           alt=""
           fill
           sizes="100vw"
